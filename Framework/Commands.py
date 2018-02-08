@@ -1,6 +1,5 @@
 """Create and implements the commands"""
 from Framework.Constants import StatusConst
-from Framework.Status import hasstatus, getstatus, setstatus,  getinventory, getallstatus
 from Framework.Local import Local
 
 __author__ = 'Thadeu Jose'
@@ -34,7 +33,7 @@ class Go(Command):
 class Get(Command):
     """Command you use to pick a item"""
     def function(self, args):
-        inventory = getinventory(self.local, StatusConst.INVENTORY)
+        inventory = self.local.getstatus(StatusConst.INVENTORY)
         itemname = " ".join(args)
         if not inventory:
             return "There is nothing to get here"

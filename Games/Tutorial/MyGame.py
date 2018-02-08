@@ -1,8 +1,6 @@
 from Framework.Commands import Command, Go
 from Framework.Direction import adddirection
 from Framework.Game import Game
-from Framework.Status import setstatus, getstatus
-
 
 class MyGame(Game):
 

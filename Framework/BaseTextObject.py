@@ -10,15 +10,11 @@ class TextObject(object):
     """
 
     def __init__(self, name, description):
-        if name:
-            self._name = name
-        else:
-            raise EmptyStringException('name')
-
-        if description:
-            self._description = description
-        else:
-            raise EmptyStringException('description')
+        self._name = None
+        self._description = None
+        self.status = dict()
+        self.name = name
+        self.description = description
 
     @property
     def name(self):
@@ -56,3 +52,13 @@ class TextObject(object):
 
     def __str__(self):
         return self._name+"\n"+self._description
+
+    def getstatus(self, idx):
+        return self.status[idx]
+
+    def setstatus(self, idx, value):
+        self.status[idx] = value
+
+    def hasstatus(self, idx):
+        return idx in self.status
+

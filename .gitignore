@@ -1,5 +1,3 @@
-.ideia/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -101,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+.idea/.name
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/dictionaries/Thadeu_Jose.xml
+.idea/FrameworkTextAdventure.iml
+.idea/encodings.xml
+.idea/misc.xml

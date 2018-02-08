@@ -29,3 +29,13 @@ class TestTextObject(TestCase):
     textObject = TextObject("Test", "Test")
     textObject.description = "None"
     self.assertEqual(textObject.description, "None")
+
+  def test_setstatus(self):
+    textObject = TextObject("Test", "Test")
+    textObject.setstatus("idx",1)
+    self.assertEqual(textObject.getstatus("idx"),1)
+
+  def test_setstatus(self):
+    textObject = TextObject("Test", "Test")
+    textObject.setstatus("idx",1)
+    self.assertEqual(textObject.hasstatus("idx"),True)

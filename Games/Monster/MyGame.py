@@ -1,8 +1,5 @@
-from Framework.Actor import NPC
 from Framework.Commands import Command
 from Framework.Game import Game
-from Framework.Item import Item
-from Framework.Status import addstatus, getstatus, getallstatus
 from Framework.Tag import Tag
 
 

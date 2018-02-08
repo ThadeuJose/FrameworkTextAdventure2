@@ -1,7 +1,5 @@
 from Framework.Game import Game
-from Framework.Commands import Command, See, Go
-from Framework.Item import Item
-from Framework.Status import addstatus, getstatus, setstatus, getinventory
+from Framework.Commands import Command,Go
 
 __author__ = 'Thadeu Jose'
 

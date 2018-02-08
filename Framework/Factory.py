@@ -1,7 +1,6 @@
 from Framework.Commands import Go, Get, See, Open
 from Framework.Constants import CommandIndex, CommandConst, StatusConst, DIRECTION_INDEX, LOCAL_INDEX
 from Framework.Item import Item
-from Framework.Status import addstatus, hasstatus, getstatus, addinventory, getinventory
 from Framework.Exceptions import CommandNotFoundException,ContainerNotFoundError, IncorrectTypeException
 from Framework.Actor import NPC
 
@@ -59,7 +58,7 @@ class TextObjectFactory:
         """Add a list of status in a class"""
         for elem in lis:
             statusname, statusattribute = elem.lower().split(':')
-            addstatus(cls, statusname, statusattribute)
+            cls.addstatus(statusname, statusattribute)
 
     def _make_start(self):
         self._controller.currentlocal = self._controller.getlocal(self._local.title)
@@ -74,29 +73,29 @@ class TextObjectFactory:
     #Todo não esta fazendo multiplos itens, consertar
     def _make_item(self):
         newitem = Item(self._command[1], self._command[2])
-        addinventory(self._local, StatusConst.INVENTORY, newitem)
+        self._local.setstatus(StatusConst.INVENTORY, newitem)
         self._controller.addcommand(self._local.title, CommandConst.GET, Get)
         self._controller.addcommand(self._local.title, CommandConst.SEE, See)
-        if len(self._command) > 3:
-            self._createstatus(newitem, self._command[3:])
-            if hasstatus(newitem, StatusConst.CONTAINER):
-                self._controller.addcommand(self._local.title, CommandConst.OPEN, Open)
-            if hasstatus(newitem, StatusConst.QUANT):
-                for i in range(int(getstatus(newitem, StatusConst.QUANT))-1):
-                    addinventory(self._local, StatusConst.INVENTORY, newitem)
-            if hasstatus(newitem, StatusConst.INSIDE):
-                containername = getstatus(newitem, StatusConst.INSIDE)
-                inv = getinventory(self._local, StatusConst.INVENTORY)
-                if containername in inv:
-                    addstatus(newitem, StatusConst.VISIBLE, False)
-                else:
-                    raise ContainerNotFoundError(containername)
+        # if len(self._command) > 3:
+        #     self._createstatus(newitem, self._command[3:])
+        #     if newitem.hasstatus(StatusConst.CONTAINER):
+        #         self._controller.addcommand(self._local.title, CommandConst.OPEN, Open)
+        #     if hasstatus(newitem, StatusConst.QUANT):
+        #         for i in range(int(newitem.getstatus(StatusConst.QUANT))-1):
+        #             addinventory(self._local, StatusConst.INVENTORY, newitem)
+        #     if hasstatus(newitem, StatusConst.INSIDE):
+        #         containername = getstatus(newitem, StatusConst.INSIDE)
+        #         inv = getinventory(self._local, StatusConst.INVENTORY)
+        #         if containername in inv:
+        #             newitem.addstatus(StatusConst.VISIBLE, False)
+        #         else:
+        #             raise ContainerNotFoundError(containername)
 
     def _make_status(self):
         self._createstatus(self._local, self._command[1:])
 
     def _make_NPC(self):
         newnpc = NPC(self._command[1], self._command[2])
-        addstatus(self._local, self._command[1], newnpc)
+        self._local.addstatus(self._command[1], newnpc)
         if len(self._command) > 3:
             self._createstatus(newnpc, self._command[3:])

@@ -22,10 +22,7 @@ class MyGame(Game):
 
 
 class ConditionalGo(Go):
-    def __init__(self, local, controller):
-        Go.__init__(self, local, controller)
-
-    def __call__(self, args):
+    def function(self, args):
         if self.local.name == 'Entrance' and args[0].lower() == 'north':
             self.local.description = ('You are in the Entrance.\n'
                                       'The Cave is to the north.')
@@ -56,20 +53,14 @@ class ConditionalGo(Go):
 
 
 class Push(Command):
-    def __init__(self, local, controller):
-        Command.__init__(self, local, controller)
-
-    def __call__(self, args):
+    def function(self, args):
         if args[0].lower() == "button":
             setstatus(self.local, "gate_closed", False)
             return "You sucessful press the button"
 
 
 class Ask(Command):
-    def __init__(self, local, controller):
-        Command.__init__(self, local, controller)
-
-    def __call__(self, args):
+    def function(self, args):
         if args.lower().strip() == "wizard about the portal":
             return ('So you want to go through my portal? Well then, we may have a problem.\n'
                     'See, I forgot how to open it. If only I could remember...\n'
@@ -79,10 +70,7 @@ class Ask(Command):
 
 
 class Show(Command):
-    def __init__(self, local, controller):
-        Command.__init__(self, local, controller)
-
-    def __call__(self, args):
+    def function(self, args):
         itemname = " ".join(args)
         if itemname.lower() != "potion book":
             return 'No, no, no. What else do you have?'

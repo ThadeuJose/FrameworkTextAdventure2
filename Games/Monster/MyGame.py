@@ -8,7 +8,7 @@ class MyGame(Game):
     def preprocess(self):
         self.framework.addcls("craft", Craft)
         self.framework.addcls("monster", Monster)
-        self.framework.addcls("talk",Talk)
+        self.framework.addcls("talk", Talk)
 
     def init(self):
         self.framework.addplayerstatus("Player", "HP", 20)
@@ -17,12 +17,11 @@ class MyGame(Game):
 
 
 class Monster(Tag):
-    def make(self):
-        monster = self.framework.createtextobject(self.args[0], self.args[1],
-                                                   {"HP": self.args[2], "A": self.args[3], "D": self.args[4]})
-        self.framework.addlocal(self.local, self.args[0], monster)
-        self.framework.addlocal(self.local, "Analyze", Analyze)
-        self.framework.addlocal(self.local, "Attack", Attack)
+    def make(self, local, framework, args):
+        monster = framework.createtextobject(args[0], args[1], {"HP": args[2], "A": args[3], "D": args[4]})
+        framework.addlocal(local, args[0], monster)
+        framework.addlocal(local, "Analyze", Analyze)
+        framework.addlocal(local, "Attack", Attack)
 
 
 class Attack(Command):
@@ -74,7 +73,7 @@ class Craft(Command):
 class Analyze(Command):
     def function(self, args):
         monster = self.framework.gettextobject(self.local, "Rabbit")
-        return monster.name + " " + self.framework.getallstatus(monster)
+        return monster.name + " " + self.framework.getallstatus(monster)#
 
 game = MyGame("Monster.yaml")
-game.run("inputf.txt")
+game.run()#("inputf.txt")

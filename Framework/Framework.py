@@ -30,7 +30,7 @@ class Framework:
         textobject.setstatus(idx,valuestatus)
 
     def getstatus(self,idx,idstatus):
-        return getstatus(idx,idstatus)
+        return idx.getstatus(idstatus)
 
     def getlocal(self, title):
         return self._controller.getlocal(title)

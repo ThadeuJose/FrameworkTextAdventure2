@@ -3,7 +3,7 @@ import yaml
 from Framework.Debug import Debug
 from Framework.Local import Local
 from Framework.Exceptions import *
-from Framework.Factory import TextObjectFactory
+from Framework.Factory import Factory
 from Framework.Constants import *
 
 __author__ = 'Thadeu Jose'

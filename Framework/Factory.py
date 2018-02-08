@@ -8,7 +8,7 @@ __author__ = 'Thadeu Jose'
 
 
 #TODO Take magic number and character ':'
-class TextObjectFactory:
+class Factory:
     """Create all the commands"""
 
     def __init__(self):
@@ -34,13 +34,13 @@ class TextObjectFactory:
         if commandindex in self._commanddispatch:
             self._commanddispatch[commandindex]()
         elif commandindex in self._tagdispatch:
-            self._tagdispatch[commandindex]._aux_make()
+            self._tagdispatch[commandindex].make(local, self._controller.framework, command[1:])
         else:
             raise CommandNotFoundException(commandindex)
 
     def addnewtag(self, id, cls):
         """Add a new tag. If the parser find this tag,he execute the function"""
-        self._tagdispatch[id.lower()] = cls(self, self._controller)
+        self._tagdispatch[id.lower()] = cls()
 
     def addnewclass(self, id, commandclass):
         """Add a new tag.

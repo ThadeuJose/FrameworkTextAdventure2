@@ -1,6 +1,6 @@
 from Framework.Actor import Player
 from Framework.Constants import CommandConst, PrintMode
-from Framework.Factory import TextObjectFactory
+from Framework.Factory import Factory
 from Framework.Framework import Framework
 from Framework.Parser import Parser
 from Framework.World import World
@@ -13,7 +13,7 @@ class Game:
     """Main class of the framework and class who will be inherited"""
     def __init__(self, filename, debug=PrintMode.NOT_PRINT):
         self.world = World()
-        self.factory = TextObjectFactory()
+        self.factory = Factory()
         self.player = Player()
         self.controller = Controller(self, self.world, self.player, self.factory)
         self.factory._controller = self.controller
